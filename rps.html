@@ -6,18 +6,28 @@
 </head>
 <body>
 
-<button id="rock-btn">Rock</button>
-<button id="paper-btn">Paper</button>
-<button id="scissor-btn">Scissor</button><br />
+<ul id="image-list">
+<button id="rock-btn"><img class="image" src="./images/rock.png"></button>
+<button id="paper-btn"><img class="image" src="./images/paper.png"></button>
+<button id="scissor-btn"><img class="image" src="./images/scissor.png"></button>
+</ul>
 
-<div id="results-display">test</div>
+<div id="results-display">Choose Rock, Paper, or Scissor.</div>
 
 
   <script>
     // Your JavaScript goes here!
 
+    const imgList = document.querySelector('#image-list')
+    imgList.setAttribute('align', 'center')
     const results = document.querySelector('#results-display')
-
+    results.setAttribute('align', 'center')
+    const img = document.querySelectorAll('.image')
+    
+    for (let i = 0; i < img.length; i++) {
+        img[i].style.height = "200px"
+        img[i].style.width = "200px"
+    }
 
     function getComputerChoice() {
         let computerChoice = Math.floor(Math.random() * 10);
@@ -42,25 +52,25 @@
         let computerSelection = getComputerChoice();
         
         if (playerSelection.toLowerCase() == computerSelection.toLowerCase()) {
-          results.textContent = "You both picked " + computerSelection + "." + " It's a Tie! "  + "The score is " + playerScore + " to " + computerScore + ".";
+          results.textContent = "You both picked " + computerSelection + ". " + "The score is still " + playerScore + " to " + computerScore + ".";
         }
         else if ((playerSelection.toLowerCase() == "rock" && computerSelection == "paper") 
         || (playerSelection.toLowerCase() == "paper" && computerSelection == "scissor") 
         || (playerSelection.toLowerCase() == "scissor" && computerSelection == "rock")) {
           computerScore++;
-          results.textContent = "Your " + playerSelection + " loses to your opponents "  + computerSelection + "." + " You Lost! " + "The score is " + playerScore + " to " + computerScore + ".";
+          results.textContent = "Your " + playerSelection + " loses to your opponents "  + computerSelection + ". " + "The score is " + playerScore + " to " + computerScore + ".";
         }
         else if ((playerSelection.toLowerCase() == "paper" && computerSelection == "rock") 
         || (playerSelection.toLowerCase() == "scissor" && computerSelection == "paper") 
         || (playerSelection.toLowerCase() == "rock" && computerSelection == "scissor")) {
           playerScore++;
-          results.textContent = "Your " + playerSelection + " beats your opponents " + computerSelection + "." + " You Won! " + "The score is " + playerScore + " to " + computerScore + ".";
+          results.textContent = "Your " + playerSelection + " beats your opponents " + computerSelection + ". " + "The score is " + playerScore + " to " + computerScore + ".";
       }
     }
 
 
     if (playerScore == 5) {
-      results.textContent = "You Win! Reload to play again."
+      results.textContent = "You Won! Reload to play again."
     }
     else if (computerScore == 5) {
       results.textContent = "You Lost! Reload to play again."
